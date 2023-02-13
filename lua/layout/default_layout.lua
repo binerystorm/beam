@@ -18,7 +18,9 @@ function init_link(file) --str(path)
     return {
         text = {"+ " .. file},
         hl_tbl = {
-            { start = 0, stop = 2, color = "Statement" }
+            {
+                { start = 0, stop = 2, color = "Statement" }
+            }
         }
     }
 end
@@ -39,14 +41,20 @@ local title = {
         ""
     },
     hl_tbl = {
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "Statement"},
-        {start = 0, stop = -1, color = "String"},
-        {start = 0, stop = -1, color = "String"}
+        {{start = 0, stop = -1, color = "Statement"}},
+        {{start = 0, stop = -1, color = "Statement"}},
+        {{start = 0, stop = -1, color = "Statement"}},
+        {{start = 0, stop = -1, color = "Statement"}},
+        {{start = 0, stop = -1, color = "Statement"}},
+        {
+            {start = 0, stop = -1, color = "Statement"},
+            {start = 0, stop = 6, color = "String"}
+        },
+        {
+            {start = 0, stop = -1, color = "String"},
+            {start = 31, stop = -1, color = "Statement"}
+        },
+        {{start = 0, stop = -1, color = "String"}}
     }
 }
 
@@ -56,8 +64,8 @@ local header_repos = {
         "====="
     },
     hl_tbl = {
-        {start = 0, stop = -1, color = "String"},
-        {start = 0, stop = -1, color = "Statement"}
+        {{start = 0, stop = -1, color = "String"}},
+        {{start = 0, stop = -1, color = "Statement"}},
     }
 }
 

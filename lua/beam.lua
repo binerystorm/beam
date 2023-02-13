@@ -17,15 +17,16 @@ function display_layout(layout) -- tbl(layout) ->
     line_count = 0
     for _, elem in ipairs(layout) do
         vim.api.nvim_buf_set_lines(0, line_count, -1, false, elem.text)
-        for idx, color in ipairs(elem.hl_tbl) do
-            vim.api.nvim_buf_add_highlight(
-                0, -1,
-                color.color,
-                (line_count + idx) - 1,
-                color.start,
-                color.stop
-            )
-
+        for idx, line in ipairs(elem.hl_tbl) do
+            for _, color in ipairs(line) do
+                vim.api.nvim_buf_add_highlight(
+                    0, -1,
+                    color.color,
+                    (line_count + idx) - 1,
+                    color.start,
+                    color.stop
+                )
+            end
         end
         line_count = line_count + #elem.text
     end
