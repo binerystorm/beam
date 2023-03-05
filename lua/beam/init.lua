@@ -1,5 +1,8 @@
-local layout = require("layout.default_layout")
+local builtin = require("beam.builtin")
 local M = {}
+M.builtin = require("beam.builtin")
+M.conf = require("beam.conf")
+
 
 function construct_beam_buf() -- void -> void
     vim.opt_local.bufhidden = 'wipe'
@@ -32,19 +35,13 @@ function display_layout(layout) -- tbl(layout) ->
     end
     vim.api.nvim_buf_set_option(0, "modifiable", false)
 end
-
-M.builtin = {
-    switch_project = function()
-        local project = vim.fn.expand("<cfile>")
-        vim.cmd.cd(project)
-        vim.cmd.edit(project)
-    end,
-    l = layout
-}
-
-M.setup = function()
+M.setup = function(user_opts, l)
+    local conf = require("beam.conf")
+    local layout = l or require("layout.default_layout")
+    conf = vim.tbl_deep_extend("force", conf, user_opts or {}
+)
     if vim.fn.argc() == 0 then
-        vim.cmd.cd(vim.fn.expand("~/repos"))
+        vim.cmd.cd(vim.fn.expand(conf.repos_dir))
         construct_beam_buf()
         display_layout(layout)
     end
