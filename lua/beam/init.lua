@@ -1,7 +1,6 @@
 local builtin = require("beam.builtin")
 local M = {}
 M.builtin = require("beam.builtin")
-M.conf = require("beam.conf")
 
 
 function construct_beam_buf() -- void -> void
@@ -41,10 +40,10 @@ M.configure = function(user_opts)
 end
 
 M.setup = function()
-    local conf = require("beam.conf")
+    local config = require("beam.conf").values
     local layout = l or require("layout.default_layout")
     if vim.fn.argc() == 0 then
-        vim.cmd.cd(vim.fn.expand(conf.repos_dir))
+        vim.cmd.cd(vim.fn.expand(config.repos_dir))
         construct_beam_buf()
         display_layout(layout)
     end
