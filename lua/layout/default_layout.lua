@@ -1,5 +1,5 @@
 builtin = require("beam.builtin")
-conf = require("beam.conf")
+conf = require("beam.conf").values
 -- layout structure:
 --   {
 --     type,

@@ -35,11 +35,14 @@ function display_layout(layout) -- tbl(layout) ->
     end
     vim.api.nvim_buf_set_option(0, "modifiable", false)
 end
-M.setup = function(user_opts, l)
+
+M.configure = function(user_opts)
+    require("beam.conf").set(user_opts)
+end
+
+M.setup = function()
     local conf = require("beam.conf")
     local layout = l or require("layout.default_layout")
-    conf = vim.tbl_deep_extend("force", conf, user_opts or {}
-)
     if vim.fn.argc() == 0 then
         vim.cmd.cd(vim.fn.expand(conf.repos_dir))
         construct_beam_buf()
